@@ -54,7 +54,7 @@ private:
 
 
 int main()
-{
+{/*
     std::stringstream test;
     test << "create A" << std::endl;
     test << "create B" << std::endl;
@@ -74,7 +74,7 @@ int main()
 
     test << "INTERSECTION" << std::endl;
     test << "SYMMETRIC_DIFFERENCE" << std::endl;
-
+*/
 
     std::shared_ptr<TDBController> controller = std::make_shared<TDBController>();
     TShell  shell(controller);

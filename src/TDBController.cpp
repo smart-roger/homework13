@@ -25,12 +25,6 @@ TDBController::ptrTable TDBController::getTable (std::string name){
     return _tables[name];
 }
 
-TOperationResult TDBController::intersection (std::string nameLeft, std::string nameRight){
-}
-
-TOperationResult TDBController::symmetric_difference (std::string nameLeft, std::string nameRight){
-}
-
 TOperationResult TDBController::insert(std::string nameTable, int newID, std::string newName){
     ptrTable table = getTable(nameTable);
     if(nullptr != table){
