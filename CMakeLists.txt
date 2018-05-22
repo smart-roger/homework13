@@ -3,11 +3,14 @@
 #project(join_server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 project(join_server VERSION 0.0)
 
+find_package(Boost COMPONENTS system thread REQUIRED)
+SET(Boost_USE_STATIC_LIBS ON)
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+
 include_directories(
 	include
 )
-
-find_package (Threads)
 
 add_executable(join_server
 					main.cpp 
@@ -25,8 +28,8 @@ set_target_properties(join_server PROPERTIES
 	COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
 
-
-target_link_libraries (join_server ${CMAKE_THREAD_LIBS_INIT})
+SET(USED_LIBS ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY})
+target_link_libraries (join_server ${USED_LIBS})
 
 install(TARGETS join_server RUNTIME DESTINATION bin)
 
