@@ -1,7 +1,7 @@
 ﻿cmake_minimum_required(VERSION 3.2)
 
-#project(join_server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
-project(join_server VERSION 0.0)
+project(join_server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+#project(join_server VERSION 0.0)
 
 find_package(Boost COMPONENTS system thread REQUIRED)
 SET(Boost_USE_STATIC_LIBS ON)
