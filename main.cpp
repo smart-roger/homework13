@@ -60,7 +60,7 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    size_t port (argv[1]);
+    int port (atoi(argv[1]));
     /*
     std::stringstream test;
     test << "create A" << std::endl;
