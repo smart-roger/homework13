@@ -22,10 +22,6 @@ class TDBController
 
     protected:
 
-
-        TOperationResult intersection (std::string nameLeft, std::string nameRight);
-        TOperationResult symmetric_difference (std::string nameLeft, std::string nameRight);
-
         TOperationResult insert(std::string nameTable, int newID, std::string newName);
         TOperationResult truncate(std::string nameTable);
 

@@ -53,8 +53,15 @@ private:
 
 
 
-int main()
-{/*
+int main(int argc, char** argv)
+{
+    if (argc < 2){
+        std::cout << "Using: join_server <port> "<<std::endl;
+        return -1;
+    }
+
+    size_t port (argv[1]);
+    /*
     std::stringstream test;
     test << "create A" << std::endl;
     test << "create B" << std::endl;
@@ -88,7 +95,7 @@ int main()
 
     boost::asio::io_service io_service;
 
-    tcp::endpoint endpoint(tcp::v4(), 1234);
+    tcp::endpoint endpoint(tcp::v4(), port);
     server serverDB(io_service, endpoint);
 
     io_service.run();
