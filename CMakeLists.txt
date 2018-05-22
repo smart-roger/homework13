@@ -10,12 +10,12 @@ include_directories(
 find_package (Threads)
 
 add_executable(join_server
-					main.cpp ,
-					src/TTable.cpp,
-					src/TShell.cpp,
-					src/TQueryResult.cpp,
-					src/TOperationResult.cpp,
-					src/TDBController.cpp,
+					main.cpp 
+					src/TTable.cpp
+					src/TShell.cpp
+					src/TQueryResult.cpp
+					src/TOperationResult.cpp
+					src/TDBController.cpp
 					src/TCommand.cpp
 					)
 
