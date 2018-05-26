@@ -15,6 +15,9 @@ TShell::TShell(std::shared_ptr<TDBController> controller):_controller(controller
 
     ptrCommand = std::make_shared<TCommandDifference>();
     _commands[ptrCommand->command()] = ptrCommand;
+
+    ptrCommand = std::make_shared<TCommandTruncate>();
+    _commands[ptrCommand->command()] = ptrCommand;
 }
 
 TShell::~TShell()
@@ -22,19 +25,22 @@ TShell::~TShell()
     _commands.clear();
 }
 
-void TShell::execute(std::string strCommand){
+std::string TShell::execute(std::string strCommand){
     std::lock_guard<std::mutex> lock(_mutexTransaction);
     std::stringstream   sstream(strCommand);
 
     std::string command;
     sstream >> command;
 
+    std::string result;
+
     if(0==_commands.count(command)){
-        std::cout << "Err " << "Command " << command << " not found." << std::endl;
+        result = std::string("Err ") + "Command " + command + " not found.";
     }else{
         std::shared_ptr<TCommand>   ptrCommand = _commands[command];
         auto Res = ptrCommand->exec(_controller, sstream);
-        std::cout << Res.toString() << std::endl;
-
+        result = Res.toString();
     }
+
+    return result;
 }

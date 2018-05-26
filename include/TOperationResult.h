@@ -22,6 +22,11 @@ class TOperationResult
 
         std::string toString() const {
             std::string result;
+
+            if(!_data.empty()){
+                std::for_each(_data.begin(), _data.end(), [&result](auto row){result += row; result += "\r\n";});
+            }
+
             switch(_code){
                 case Result::OK: result+= "OK"; break;
                 case Result::WRONG_ARGUMENTS: result+= "Wrong command Arguments";break;
@@ -30,12 +35,7 @@ class TOperationResult
                 case Result::DUPLICATE_KEY: result+= "This ID is not unique!";break;
                 default: result+= "Unknown Error";
             };
-
-            if(!_data.empty()){
-                result +="\n";
-                std::for_each(_data.begin(), _data.end(), [&result](auto row){result += row; result += "\n";});
-            }
-
+            result += "\r\n";
             return result;
         }
     protected:

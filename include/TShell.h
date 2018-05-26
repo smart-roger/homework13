@@ -18,7 +18,7 @@ class TShell
         TShell(std::shared_ptr<TDBController> controller);
         ~TShell();
 
-        void execute(std::string strCommand);
+        std::string execute(std::string strCommand);
     protected:
 
     private:
@@ -26,5 +26,7 @@ class TShell
         std::shared_ptr<TDBController>   _controller;
         std::unordered_map<std::string, std::shared_ptr<TCommand>> _commands;
 };
+
+using TShellPtr = std::shared_ptr<TShell>;
 
 #endif // TSHELL_H
