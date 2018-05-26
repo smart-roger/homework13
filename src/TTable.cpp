@@ -51,6 +51,10 @@ TOperationResult TTable::intersection(std::shared_ptr<TTable> right){
 
     std::vector<std::string>    result;
 
+    std::sort(_rows.begin(), _rows.end(),
+              [](dataType left, dataType right){
+                    return left.id < right.id;
+              });
     std::for_each(_rows.begin(), _rows.end(), [&result, right](dataType data){
                     int rightIndex (right->getIndex(data.id));
                     if(-1 != rightIndex){
@@ -66,20 +70,25 @@ TOperationResult TTable::symmetric_difference(std::shared_ptr<TTable> right){
 
 
     std::vector<std::string>    result;
-    std::for_each(_rows.begin(), _rows.end(), [&result, right](dataType data){
+
+    std::map<int, std::string> sorted_values;
+
+    std::for_each(_rows.begin(), _rows.end(), [&sorted_values, right](dataType data){
                     int rightIndex (right->getIndex(data.id));
                     if(-1 == rightIndex){
-                        result.push_back(std::to_string(data.id)+","+data.name+",");
+                        sorted_values[data.id] = std::to_string(data.id)+","+data.name+",";
                     }
                   });
 
-    std::for_each(right->_rows.begin(), right->_rows.end(), [&result, this](dataType data){
+    std::for_each(right->_rows.begin(), right->_rows.end(), [&sorted_values, this](dataType data){
                     int thisIndex (this->getIndex(data.id));
                     if(-1 == thisIndex){
-                        result.push_back(std::to_string(data.id)+","+","+data.name);
+                        sorted_values[data.id] = std::to_string(data.id)+","+","+data.name;
                     }
                   });
-    std::sort(result.begin(), result.end());
+    for( auto val = sorted_values.begin(); val != sorted_values.end(); ++val)
+        result.push_back(val->second);
+
     return TOperationResult(TOperationResult::Result::OK, result);
 
 }
