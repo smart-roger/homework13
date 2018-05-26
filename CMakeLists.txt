@@ -18,6 +18,7 @@ add_executable(join_server
 					src/TShell.cpp
 					src/TDBController.cpp
 					src/TCommand.cpp
+					src/network.cpp
 					)
 
 set_target_properties(join_server PROPERTIES
