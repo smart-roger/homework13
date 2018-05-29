@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     std::stringstream init;
     init << "create A" << std::endl;
     init << "create B" << std::endl;
-    init << "INSERT A 0 lean" << std::endl;
+    /*init << "INSERT A 0 lean" << std::endl;
     init << "INSERT A 1 sweater" << std::endl;
     init << "INSERT A 2 frank" << std::endl;
     init << "INSERT A 3 violation" << std::endl;
@@ -30,7 +30,7 @@ int main(int argc, char** argv)
     init << "INSERT B 5 lake" << std::endl;
     init << "INSERT B 6 flour" << std::endl;
     init << "INSERT B 7 wonder" << std::endl;
-    init << "INSERT B 8 selection" << std::endl;
+    init << "INSERT B 8 selection" << std::endl;*/
 
     {
         std::string line;
