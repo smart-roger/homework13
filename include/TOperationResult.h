@@ -43,12 +43,12 @@ class TOperationResult
                 }
 
                 case Result::TABLE_EXISTS_ALREADY: {
-                    result += "This table exists";
+                    result += "This table exists ";
                     break;
                 }
 
                 case Result::UNKNOWN_TABLE:{
-                    result +=  "This table doesn't exist";
+                    result +=  "This table doesn't exist ";
                     break;
                 }
 
@@ -56,7 +56,7 @@ class TOperationResult
                     result += "duplicate ";
                     break;
                 }
-                default: result += "Unknown Error";
+                default: result += "Unknown Error ";
             };
 
             if(!_data.empty() && _code!=Result::OK)

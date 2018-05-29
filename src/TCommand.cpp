@@ -79,11 +79,11 @@ TOperationResult TCommandDifference::execute (std::shared_ptr<TDBController> con
 
     std::shared_ptr<TTable> tableLeft = controller->getTable("A");
     if(nullptr == tableLeft)
-        return TOperationResult::Result::UNKNOWN_TABLE;
+        return {TOperationResult::Result::UNKNOWN_TABLE, {"A"}};
 
     std::shared_ptr<TTable> tableRight = controller->getTable("B");
     if(nullptr == tableRight)
-        return TOperationResult::Result::UNKNOWN_TABLE;
+        return {TOperationResult::Result::UNKNOWN_TABLE,{"B"}};
 
     TOperationResult result = tableLeft->symmetric_difference(tableRight);
     return result;
