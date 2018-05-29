@@ -35,7 +35,7 @@ std::string TShell::execute(std::string strCommand){
     std::string result;
 
     if(0==_commands.count(command)){
-        result = std::string("Err ") + "Command " + command + " not found.";
+        result = std::string(err_header) + "Command " + command + " not found.\r\n";
     }else{
         std::shared_ptr<TCommand>   ptrCommand = _commands[command];
         auto Res = ptrCommand->exec(_controller, sstream);

@@ -44,32 +44,32 @@ std::string TCommandInsert::getUsageString(){return "INSERT <table_name> <id> <n
 TOperationResult TCommandTruncate::execute (std::shared_ptr<TDBController> controller,
                                            std::stringstream& args){
 
-    std::shared_ptr<TTable> tableLeft = controller->getTable("A");
-    if(nullptr == tableLeft)
-        return TOperationResult::Result::UNKNOWN_TABLE;
+    std::string tablename;
+    args >> tablename;
+    if(!args.eof())
+        return {TOperationResult::Result::WRONG_ARGUMENTS};
 
-    std::shared_ptr<TTable> tableRight = controller->getTable("B");
-    if(nullptr == tableRight)
-        return TOperationResult::Result::UNKNOWN_TABLE;
+    std::shared_ptr<TTable> table = controller->getTable(tablename);
 
-    return tableLeft->truncate();
+    if(nullptr == table)
+        return {TOperationResult::Result::UNKNOWN_TABLE, {tablename}};
+    else return table->truncate();
 }
 
-std::string TCommandTruncate::getUsageString(){return "TRUNATE <table_name>";}
+std::string TCommandTruncate::getUsageString(){return "TRUNCATE <table_name>";}
 
 TOperationResult TCommandIntersection::execute (std::shared_ptr<TDBController> controller,
                                                 std::stringstream& args){
 
     std::shared_ptr<TTable> tableLeft = controller->getTable("A");
     if(nullptr == tableLeft)
-        return TOperationResult::Result::UNKNOWN_TABLE;
+        return {TOperationResult::Result::UNKNOWN_TABLE, {"A"}};
 
     std::shared_ptr<TTable> tableRight = controller->getTable("B");
     if(nullptr == tableRight)
-        return TOperationResult::Result::UNKNOWN_TABLE;
+        return {TOperationResult::Result::UNKNOWN_TABLE,{"B"}};
 
-    TOperationResult result = tableLeft->intersection(tableRight);
-    return result;
+    return tableLeft->intersection(tableRight);
 }
 
 std::string TCommandIntersection::getUsageString(){return "INTERSECTION";}

@@ -16,9 +16,11 @@ TTable::~TTable()
 TOperationResult TTable::valueAdd(int id, std::string name){
     std::lock_guard<std::mutex> lock(_mutexTransaction);
 
-    if (0!=_indexForId.count(id))
-        return TOperationResult::Result::DUPLICATE_KEY;
-
+    if (0!=_indexForId.count(id)){
+		TOperationResult result(TOperationResult::Result::DUPLICATE_KEY, {std::to_string(id)});
+        return result;
+	}
+	
     _rows.push_back(dataType(id, name));
     std::sort(_rows. begin(), _rows.end(), [](auto left, auto right){return left.id < right.id;});
     indexUpdate();
