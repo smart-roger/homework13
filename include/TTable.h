@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <string>
 #include <vector>
-#include <unordered_map>
 #include <memory>
 #include <mutex>
 #include <map>
@@ -31,13 +30,12 @@ class TTable
         TOperationResult symmetric_difference(std::shared_ptr<TTable> right);
 
     protected:
-        virtual void indexUpdate();
         int getIndex(int id);
 
 
     private:
         std::vector<dataType>   _rows;
-        std::unordered_map<int, int>      _indexForId;
+        std::map<int, int>      _indexForId;
 
         std::mutex  _mutexTransaction;
 };
